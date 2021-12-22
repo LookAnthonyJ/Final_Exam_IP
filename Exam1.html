@@ -1,0 +1,29 @@
+<html>
+        <head>
+            <title>Exam1</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        </head>
+        <body>
+            <p>Temperature in Celsius<input type="text" id="celsius"></input><button id="convert1">Convert</button> Result:<span id="result_celsius"></span></p>
+            <p>Temperature in Fahrenheit<input id="fahrenheit"></input><button id="convert2">Convert</button> Result:<span id="result_fahrenheit"></span></p>
+
+            <script>
+                $(document).ready(() => {
+                    $("#convert1").click(() => {
+                        let degrees = $("#celsius").val();
+                        $.post("https://ip-uacs.herokuapp.com/api/Convert/ToFahrenheit/" + degrees, (data) => {
+                            $("#result_celsius").html(Math.round(data));
+                        });
+                    });
+
+                    $("#convert2").click(() => {
+                        let degrees = $("#fahrenheit").val();
+                        $.post("https://ip-uacs.herokuapp.com/api/Convert/ToCelsius/" + degrees, (data) => {
+                            console.log(data)
+                            $("#result_fahrenheit").html(Math.round(data));
+                        });
+                    });
+                });
+            </script>
+        </body>
+</html>
